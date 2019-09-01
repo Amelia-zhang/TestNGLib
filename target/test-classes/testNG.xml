@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="test">
+
+	<test name="testHashkeyHub">
+		<classes>
+			<class name="com.wx.hashkey.TestTries" />
+			<class name="com.wx.hashkey.TestLogin" />
+			<class name="com.wx.hashkey.TestSecret" />
+			<class name="com.wx.hashkey.TestMining" />
+			<class name="com.wx.hashkey.TestRedeem" /> 
+			<class name="com.wx.hashkey.TestEmergencyRedemption" /> 
+		</classes>
+
+	</test>
+
+</suite>
