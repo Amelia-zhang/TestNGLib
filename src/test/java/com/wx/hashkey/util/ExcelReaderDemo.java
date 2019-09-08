@@ -7,39 +7,17 @@ import java.util.HashMap;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 
+public class ExcelReaderDemo {
+	public static final String SAMPLE_XLSX_FILE_PATH = ".\\src\\test\\resources\\testdata.xlsx";
+	public static ArrayList<String> arrKey = new ArrayList<String>();
 
-public class ExcelReader {
-	//public static final String SAMPLE_XLSX_FILE_PATH = ".\\src\\test\\resources\\testdata.xlsx";
-	public ArrayList<String> arrKey = new ArrayList<String>();
-	public String fileName;
-	public String caseName;
-	static String sourceFile;
-	public Sheet sheet;
-	public Cell cell;
-	int rows;
-	int columns;
-	
-	public ExcelReader() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	/**
-	 * @param fileName excel文件名
-	 * @param caseName sheet名
-	 */
-	public ExcelReader(String fileName, String caseName) {
-		super();
-		this.fileName = fileName;
-		this.caseName = caseName;
-	}
+	public static Object[][] excelReader() throws IOException, InvalidFormatException {
 
-
-
-	public Object[][] excelReader2() throws IOException, InvalidFormatException {
 		// Creating a Workbook from an Excel file (.xls or .xlsx)
-		Workbook workbook = WorkbookFactory.create(new File(getPath()));
-		sheet = workbook.getSheet(caseName);
+		Workbook workbook = WorkbookFactory.create(new File(SAMPLE_XLSX_FILE_PATH));
+
+		// Getting the Sheet at index zero
+		Sheet sheet = workbook.getSheetAt(0);
 		// 获得总列数
 		int coloumNum = sheet.getRow(1).getPhysicalNumberOfCells();
 		// 获得总行数
@@ -78,20 +56,8 @@ public class ExcelReader {
 //		}
 		return arrmap;
 
-		
+		// return arrmap;
+
 	}
-	
-	/**
-     * 获得excel文件的路径
-     * @return
-     * @throws IOException
-     */
-    public String getPath() throws IOException {
-        File directory = new File(".");
-        sourceFile = directory.getCanonicalPath() + "\\src\\test\\resources\\"
-                + fileName + ".xlsx";
-        //System.out.println(sourceFile);
-        return sourceFile;
-    }
 
 }

@@ -12,7 +12,7 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-public class ExcelData {
+public class ExcelDataXls {
 	public Workbook workbook;
 	public Sheet sheet;
 	public Cell cell;
@@ -27,7 +27,7 @@ public class ExcelData {
 	 * @param fileName excel文件名
 	 * @param caseName sheet名
 	 */
-	public ExcelData(String fileName, String caseName) {
+	public ExcelDataXls(String fileName, String caseName) {
 		super();
 		this.fileName = fileName;
 		this.caseName = caseName;
