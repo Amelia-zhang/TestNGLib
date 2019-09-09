@@ -41,7 +41,7 @@ public class ExcelReader {
 		Workbook workbook = WorkbookFactory.create(new File(getPath()));
 		sheet = workbook.getSheet(caseName);
 		// 获得总列数
-		int coloumNum = sheet.getRow(1).getPhysicalNumberOfCells();
+		int coloumNum = sheet.getRow(0).getPhysicalNumberOfCells();
 		// 获得总行数
 		int rowNum = sheet.getLastRowNum() + 1;
 		// 为了返回值是Object[][],定义一个多行单列的二维数组

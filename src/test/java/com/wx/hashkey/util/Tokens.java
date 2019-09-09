@@ -7,6 +7,8 @@ public class Tokens {
 	public String accessToken;
 
 	public String secret;
+	
+	public String preParams;
 
 	public static String getSign(String urlPath) {
 		Tokens tokens = getLocalData();
@@ -37,6 +39,15 @@ public class Tokens {
 		saveToLocal(tokens);
 	}
 
+	public static void savePreParams(String preParams) {
+		Tokens tokens = getLocalData();
+		if (tokens == null) {
+			tokens = new Tokens();
+		}
+		tokens.preParams = preParams;
+		saveToLocal(tokens);
+	}
+	
 	public static void saveToken(String token) {
 		Tokens tokens = getLocalData();
 		if (tokens == null) {
@@ -45,6 +56,8 @@ public class Tokens {
 		tokens.accessToken = token;
 		saveToLocal(tokens);
 	}
+	
+	
 
 	public static Tokens getLocalData() {
 		String localData = FileHelper.readFile();
@@ -66,6 +79,20 @@ public class Tokens {
 
 		FileHelper.writeFile(localStr);
 
+	}
+	
+	public static String  getPreParams() {
+		Tokens tokens = getLocalData();
+		if(tokens==null) {
+			return "";
+		}
+		String params = tokens.preParams;
+		//将本地文件中preParams置为空
+		savePreParams("");
+		
+		
+		return params;
+		
 	}
 
 }

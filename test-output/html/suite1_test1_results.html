@@ -12,7 +12,7 @@
 <body>
 <h1>Default test</h1>
 <p>
-  Test duration: 1.031s
+  Test duration: 1.615s
 </p>
 
 
@@ -30,15 +30,15 @@
                   finalTestResult
       </td>
   <td class="duration">
-    0.092s
+    0.088s
   </td>
   <td class="result">
         
-          <i>Method arguments: </i><span class="arguments">{Number=2, Data={
- "deviceInfo": "iPhone 6",
- "deviceId": "67C05B1B-711A-441F-A62C-5EABB74338B3",
- "platformId": "1"
-}, Method=post, Url=system/secretKey/create, expectedMessage=SUCCESS, Name=secretKey接口}</span><br />
+          <i>Method arguments: </i><span class="arguments">{Number=4, Data={
+ "coinCode": "QTUM",
+ "isUrgent": false,
+ "qty": "0.1"
+}, Method=post, paramsConfig=save:body, passwordConfig=, Url=coin/asset/redeem/validate, expectedMessage=SUCCESS, Name=资金密码弹框校验}</span><br />
     
         
 
@@ -49,7 +49,41 @@
                   finalTestResult
       </td>
   <td class="duration">
-    0.939s
+    0.128s
+  </td>
+  <td class="result">
+        
+          <i>Method arguments: </i><span class="arguments">{Number=3, Data=unit=USD, Method=get, paramsConfig=, passwordConfig=, Url=coin/v2/account/asset/QTUM, expectedMessage=SUCCESS, Name=获得QTUM资产}</span><br />
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  finalTestResult
+      </td>
+  <td class="duration">
+    0.094s
+  </td>
+  <td class="result">
+        
+          <i>Method arguments: </i><span class="arguments">{Number=2, Data={
+ "deviceInfo": "iPhone 6",
+ "deviceId": "67C05B1B-711A-441F-A62C-5EABB74338B3",
+ "platformId": "1"
+}, Method=post, paramsConfig=, passwordConfig=, Url=system/secretKey/create, expectedMessage=SUCCESS, Name=secretKey接口}</span><br />
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  finalTestResult
+      </td>
+  <td class="duration">
+    1.065s
   </td>
   <td class="result">
         
@@ -59,7 +93,22 @@
  "platFormId": "1",
  "source": "1",
  "password": "3690d60409c8ff17702628b95f2896f4f4c59da22a91645385dc6f4c83464e87"
-}, Method=post, Url=passport/login/app, expectedMessage=SUCCESS, Name=登录接口}</span><br />
+}, Method=post, paramsConfig=, passwordConfig=, Url=passport/login/app, expectedMessage=SUCCESS, Name=登录接口}</span><br />
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  finalTestResult
+      </td>
+  <td class="duration">
+    0.240s
+  </td>
+  <td class="result">
+        
+          <i>Method arguments: </i><span class="arguments">{Number=5, Data=, Method=post, paramsConfig=use:body, passwordConfig=123456, Url=coin/asset/redeem/password/verify/, expectedMessage=SUCCESS, Name=输入资金密码}</span><br />
     
         
 
