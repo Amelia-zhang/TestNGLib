@@ -36,7 +36,7 @@ public class ExcelReader {
 
 
 
-	public Object[][] excelReader2() throws IOException, InvalidFormatException {
+	public Object[][] excelReader() throws IOException, InvalidFormatException {
 		// Creating a Workbook from an Excel file (.xls or .xlsx)
 		Workbook workbook = WorkbookFactory.create(new File(getPath()));
 		sheet = workbook.getSheet(caseName);

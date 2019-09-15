@@ -61,7 +61,7 @@ public class ExcelReaderDemoTest {
 		// 获取Excel文件的测试数据
 		Object[][] data = null;
 		try {
-			data = ExcelReaderDemo.excelReader();
+			data = ExcelReaderDemo.excelReader1();
 			// System.out.println(data);
 		} catch (InvalidFormatException e) {
 			// TODO Auto-generated catch block

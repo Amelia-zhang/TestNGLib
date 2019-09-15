@@ -11,7 +11,7 @@ public class ExcelReaderDemo {
 	public static final String SAMPLE_XLSX_FILE_PATH = ".\\src\\test\\resources\\testdata.xlsx";
 	public static ArrayList<String> arrKey = new ArrayList<String>();
 
-	public static Object[][] excelReader() throws IOException, InvalidFormatException {
+	public static Object[][] excelReader1() throws IOException, InvalidFormatException {
 
 		// Creating a Workbook from an Excel file (.xls or .xlsx)
 		Workbook workbook = WorkbookFactory.create(new File(SAMPLE_XLSX_FILE_PATH));

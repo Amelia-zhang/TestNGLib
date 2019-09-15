@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.google.gson.Gson;
 import com.wx.hashkey.util.AESUtils;
 import com.wx.hashkey.util.ExcelReader;
 import com.wx.hashkey.util.HttpRequest;
@@ -17,14 +18,14 @@ import com.wx.hashkey.util.Tokens;
 
 public class ExcelReaderTest {
 	@Test(dataProvider = "test")
-	public void finalTestResult(HashMap<String, String> data) {
-		String loginUrl = Config.HOST + data.get("Url");
+	public void finalTest(HashMap<String, String> data) {
+		String requestUrl = Config.HOST + data.get("Url");
 		String requestObj = data.get("Data");
 		String expectedMessage = data.get("expectedMessage");
 		String method = data.get("Method");
 		String name = data.get("Name");
 		String paramsConfig = data.get("paramsConfig");
-		String passwordConfig = data.get("passwordConfig");
+		String encodeConfig = data.get("encodeConfig");
 		
 		String saveConfigTag=null;
 		String useConfigTag =null;
@@ -39,28 +40,41 @@ public class ExcelReaderTest {
 			}
 		}
 		
-		if(passwordConfig!=null&&passwordConfig.length()>0) {
+		if(encodeConfig!=null&&encodeConfig.length()>0) {
 			Tokens tokens = Tokens.getLocalData();
-			String encrypPassword = AESUtils.encryp(passwordConfig,tokens.accessToken);
-			requestObj="{\"password\":\""+encrypPassword+"\"}";
+			//将string字符串转换为json
+			//get请求的加密需要进一步处理
+			String toEncode;
+			try {
+				JSONObject jsonObject=new JSONObject(requestObj);
+				toEncode = jsonObject.getString(encodeConfig);
+				String encrypPassword = AESUtils.encryp(toEncode,tokens.accessToken);
+				jsonObject.put(encodeConfig, encrypPassword);
+				requestObj=jsonObject.toString();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			//requestObj="{\"password\":\""+encrypPassword+"\"}";
 		}
 		
-		String sendPost = "";
+		String requestResult = "";
 		if(useConfigTag!=null && useConfigTag.length()>0) {
-			loginUrl+=Tokens.getPreParams();
+			requestUrl+=Tokens.getPreParams();
 		}
 		
 		if (method.equals("post")) {
-			sendPost = HttpRequest.sendPost(loginUrl, requestObj);
+			requestResult = HttpRequest.sendPost(requestUrl, requestObj);
 		} else {
-			sendPost = HttpRequest.sendGet(loginUrl, requestObj);
+			requestResult = HttpRequest.sendGet(requestUrl, requestObj);
 		}
 
 		JSONObject jsonObject;
 		try {
-			jsonObject = new JSONObject(sendPost);
+			jsonObject = new JSONObject(requestResult);
 			String returnMessage = jsonObject.getString("message");
-			if (sendPost.contains("accessToken")) {
+			if (requestResult.contains("accessToken")) {
 				String accessToken = jsonObject.getJSONObject("body").getString("accessToken");
 				Tokens.saveToken(accessToken);
 			}
@@ -91,7 +105,7 @@ public class ExcelReaderTest {
 	public Object[][] provideData() throws IOException, InvalidFormatException {
 		// 获取Excel文件的测试数据
 		ExcelReader e = new ExcelReader("testdata", "test");
-		return e.excelReader2();
+		return e.excelReader();
 
 	}
 
